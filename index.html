@@ -5,42 +5,217 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>EduGuru</title>
   <style>
-    
-    body {margin:0;padding:12px;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:linear-gradient(135deg,navy,silver);color:white;}
-    header {display:flex;align-items:center;padding:14px;background:linear-gradient(90deg,gold,darkblue);color:black;border-radius:12px;box-shadow:0 6px 16px rgba(0,0,0,0.4);}
-    header .title {flex:1;font-weight:bold;font-size:28px;letter-spacing:1.5px;}
-    button {cursor:pointer;border-radius:8px;padding:10px 16px;background:transparent;color:white;border:1px solid white;transition:all 0.25s ease;}
-    button:hover {transform:translateY(-2px);box-shadow:0 6px 14px rgba(0,0,0,0.6);}
-    button.gold {background:linear-gradient(90deg,gold,darkblue);color:white;border:none;}
-    .layout {display:grid;grid-template-columns:1fr 360px;gap:18px;margin-top:18px;}
-    .panel {background:rgba(255,255,255,0.03);padding:20px;border-radius:14px;min-height:520px;box-shadow:0 6px 16px rgba(0,0,0,0.35);transition:all 0.3s ease;}
-    .panel:hover {box-shadow:0 8px 20px rgba(0,0,0,0.5);}
-    .months {display:flex;flex-wrap:wrap;gap:12px;}
-    .month {background:rgba(255,255,255,0.02);padding:12px;border-radius:12px;width:220px;box-shadow:0 3px 10px rgba(0,0,0,0.3);transition:transform 0.2s ease,box-shadow 0.2s ease;}
-    .month:hover {transform:translateY(-3px);box-shadow:0 6px 16px rgba(0,0,0,0.4);}
-    .month h3 {margin:0 0 8px 0;color:silver;font-size:15px;}
-    .days {display:grid;grid-template-columns:repeat(7,1fr);gap:6px;}
-    .day {background:rgba(255,255,255,0.01);padding:8px;text-align:center;border-radius:8px;cursor:pointer;font-size:14px;transition:all 0.2s ease;}
-    .day:hover {transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.5);}
-    .day.selected {outline:2px solid gold;background:rgba(255,215,0,0.25);}
-    .subject-list {display:flex;flex-wrap:wrap;gap:10px;margin-top:10px;}
-    .subject {padding:8px 12px;border-radius:999px;border:1px solid rgba(255,255,255,0.02);color:gold;cursor:pointer;transition:all 0.25s ease;}
-    .subject:hover {background:rgba(255,215,0,0.25);}
-    .subject.selected {box-shadow:0 6px 16px rgba(255,215,0,0.5);}
-    .upload-area {margin-top:12px;padding:14px;background:rgba(255,255,255,0.02);border-radius:12px;box-shadow:0 3px 10px rgba(0,0,0,0.3);transition:all 0.25s ease;display:none;}
-    .upload-area:hover {box-shadow:0 6px 16px rgba(0,0,0,0.4);}
-    input[type=file] {display:block;margin-top:10px;}
-    .signin-screen {position:fixed;inset:0;background:rgba(0,0,0,1);display:flex;align-items:center;justify-content:center;z-index:9999;}
-    .signin-card {width:450px;padding:36px;border-radius:18px;background:white;color:black;box-shadow:0 10px 28px rgba(0,0,0,0.7);text-align:center;transition:transform 0.3s ease;}
-    .signin-card:hover {transform:translateY(-3px);}
-    .signin-card h2 {font-size:42px;font-weight:bold;background:linear-gradient(90deg,gold,navy);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;margin-bottom:28px;letter-spacing:1.5px;}
-    .field {margin-bottom:14px;}
-    label {display:block;margin-bottom:6px;font-size:14px;font-weight:600;}
-    input[type=text], input[type=password] {width:100%;padding:10px;border-radius:8px;border:1px solid gray;}
-    .sidebar {background:rgba(255,255,255,0.03);padding:16px;border-radius:14px;box-shadow:0 6px 16px rgba(0,0,0,0.4);transition:all 0.3s ease;}
-    .sidebar:hover {box-shadow:0 8px 20px rgba(0,0,0,0.5);}
-    #chatBox {height:340px;overflow-y:auto;padding:10px;background:rgba(255,255,255,0.01);border-radius:10px;margin-bottom:10px;}
-    #chatInput {width:calc(100% - 80px);padding:8px;border-radius:8px;border:1px solid gray;background:transparent;color:white;}
+    body {
+      margin: 0;
+      padding: 12px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, navy, silver);
+      color: white;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      padding: 14px;
+      background: linear-gradient(90deg, gold, darkblue);
+      color: black;
+      border-radius: 12px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+    }
+    header .title {
+      flex: 1;
+      font-weight: bold;
+      font-size: 28px;
+      letter-spacing: 1.5px;
+    }
+    button {
+      cursor: pointer;
+      border-radius: 8px;
+      padding: 10px 16px;
+      background: transparent;
+      color: white;
+      border: 1px solid white;
+      transition: all 0.25s ease;
+    }
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.6);
+    }
+    button.gold {
+      background: linear-gradient(90deg, gold, darkblue);
+      color: white;
+      border: none;
+    }
+    .layout {
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 18px;
+      margin-top: 18px;
+    }
+    .panel {
+      background: rgba(255, 255, 255, 0.03);
+      padding: 20px;
+      border-radius: 14px;
+      min-height: 520px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+      transition: all 0.3s ease;
+    }
+    .panel:hover {
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    }
+    .months {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .month {
+      background: rgba(255, 255, 255, 0.02);
+      padding: 12px;
+      border-radius: 12px;
+      width: 220px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .month:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+    }
+    .month h3 {
+      margin: 0 0 8px 0;
+      color: silver;
+      font-size: 15px;
+    }
+    .days {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 6px;
+    }
+    .day {
+      background: rgba(255, 255, 255, 0.01);
+      padding: 8px;
+      text-align: center;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.2s ease;
+    }
+    .day:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    }
+    .day.selected {
+      outline: 2px solid gold;
+      background: rgba(255, 215, 0, 0.25);
+    }
+    .subject-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .subject {
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.02);
+      color: gold;
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+    .subject:hover {
+      background: rgba(255, 215, 0, 0.25);
+    }
+    .subject.selected {
+      box-shadow: 0 6px 16px rgba(255, 215, 0, 0.5);
+    }
+    .upload-area {
+      margin-top: 12px;
+      padding: 14px;
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 12px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+      transition: all 0.25s ease;
+      display: none;
+    }
+    .upload-area:hover {
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+    }
+    input[type=file] {
+      display: block;
+      margin-top: 10px;
+    }
+    .signin-screen {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+    .signin-card {
+      width: 450px;
+      padding: 36px;
+      border-radius: 18px;
+      background: white;
+      color: black;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.7);
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+    .signin-card:hover {
+      transform: translateY(-3px);
+    }
+    .signin-card h2 {
+      font-size: 42px;
+      font-weight: bold;
+      background: linear-gradient(90deg, gold, navy);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+      margin-bottom: 28px;
+      letter-spacing: 1.5px;
+    }
+    .field {
+      margin-bottom: 14px;
+    }
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 14px;
+      font-weight: 600;
+    }
+    input[type=text], input[type=password] {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid gray;
+    }
+    .sidebar {
+      background: rgba(255, 255, 255, 0.03);
+      padding: 16px;
+      border-radius: 14px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+      transition: all 0.3s ease;
+    }
+    .sidebar:hover {
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+    }
+    #chatBox {
+      height: 340px;
+      overflow-y: auto;
+      padding: 10px;
+      background: rgba(255, 255, 255, 0.01);
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+    #chatInput {
+      width: calc(100% - 80px);
+      padding: 8px;
+      border-radius: 8px;
+      border: 1px solid gray;
+      background: transparent;
+      color: white;
+    }
   </style>
 </head>
 <body>
@@ -63,7 +238,7 @@
 
 <div class="layout">
   <div class="panel">
-    <h2>Calendar Oct 2025 - Mar 2026</h2>
+    <h2>Calendar Oct 2025 -    <h2>Calendar Oct 2025 - Mar 2026</h2>
     <div class="months" id="monthsContainer"></div>
     <div class="subject-list" id="subjectList"></div>
     <div class="upload-area" id="uploadArea">
@@ -81,128 +256,140 @@
 </div>
 
 <script>
-const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbx6VSMKG_TgefLM4kFPZe_V8B_qt6nhm6YbHBKRB-D8Ei6RuMF-lj7urF-e0M5fXwiclw/exec'; 
-const validUsers = {
-  "dhoni01": "Vx7!Qk2p", "kohli02": "Rp9#Lz4t", "tendulkar03": "Bh5$Fg7m", "rohit04": "Zq8&Np3v",
-  "dravid05": "Lm6*Tx9k", "jadeja06": "Cv2!Rb5p", "rahul07": "Fh3#Ks8n", "bumrah08": "Xp9$Vt6k",
-  "yadav09": "Nt4&Qd2v", "shami10": "Wz7*Lc3p", "ishant11": "Pd5!Hg9m", "pant12": "Rq8#Bv4t",
-  "pandya13": "Lk3$Fn6p", "dhawan14": "Vb6&Tx1n", "khawaja15": "Zr2*Lk7v", "smith16": "Cn9!Rq5p",
-  "warner17": "Yp4#Vz8m", "root18": "Fs7$Gt2v", "stokes19": "Mh5&Nb3k", "bairstow20": "Lx8*Qp6v",
-  "williamson21": "Rd3!Tk9p", "guptill22": "Nq2#Gv7m", "karunaratne23": "Xt9$Pl4k", "de_villiers24": "Cz5&Fb2v",
-  "amla25": "Vm6*Qr8n", "du_plessis26": "Hp3!Ks7p", "rabada27": "Lb8#Nt4v", "hendricks28": "Qf2$Vx9k",
-  "morris29": "Xs7&Lp3m", "duminy30": "Nr5*Tb1v", "kagiso31": "Kq9!Vz2p", "ab_de_villiers32": "Wm4#Fp6n",
-  "malan33": "Lt8$Qk3v", "tim_paine34": "Rs2&Nb9p", "fakhar35": "Vx6*Td7k"
-};
+document.addEventListener('DOMContentLoaded', () => {
+  const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbx6VSMKG_TgefLM4kFPZe_V8B_qt6nhm6YbHBKRB-D8Ei6RuMF-lj7urF-e0M5fXwiclw/exec'; 
+  const validUsers = {
+    "dhoni01": "Vx7!Qk2p", "kohli02": "Rp9#Lz4t", "tendulkar03": "Bh5$Fg7m", "rohit04": "Zq8&Np3v",
+    "dravid05": "Lm6*Tx9k", "jadeja06": "Cv2!Rb5p", "rahul07": "Fh3#Ks8n", "bumrah08": "Xp9$Vt6k",
+    "yadav09": "Nt4&Qd2v", "shami10": "Wz7*Lc3p", "ishant11": "Pd5!Hg9m", "pant12": "Rq8#Bv4t",
+    "pandya13": "Lk3$Fn6p", "dhawan14": "Vb6&Tx1n", "khawaja15": "Zr2*Lk7v", "smith16": "Cn9!Rq5p",
+    "warner17": "Yp4#Vz8m", "root18": "Fs7$Gt2v", "stokes19": "Mh5&Nb3k", "bairstow20": "Lx8*Qp6v",
+    "williamson21": "Rd3!Tk9p", "guptill22": "Nq2#Gv7m", "karunaratne23": "Xt9$Pl4k", "de_villiers24": "Cz5&Fb2v",
+    "amla25": "Vm6*Qr8n", "du_plessis26": "Hp3!Ks7p", "rabada27": "Lb8#Nt4v", "hendricks28": "Qf2$Vx9k",
+    "morris29": "Xs7&Lp3m", "duminy30": "Nr5*Tb1v", "kagiso31": "Kq9!Vz2p", "ab_de_villiers32": "Wm4#Fp6n",
+    "malan33": "Lt8$Qk3v", "tim_paine34": "Rs2&Nb9p", "fakhar35": "Vx6*Td7k"
+  };
 
-let currentUser = null;
-let selectedMonth = "October 2025";
-let selectedDay = 1;
-let selectedSubject = "Math";
+  let currentUser = null;
+  let selectedMonth = "October 2025";
+  let selectedDay = 1;
+  let selectedSubject = "Math";
 
-document.getElementById('loginBtn').addEventListener('click', () => {
-  const u = document.getElementById('username').value.trim();
-  const p = document.getElementById('password').value.trim();
-  if (validUsers[u] && validUsers[u] === p) {
-    currentUser = u;
-    document.getElementById('signinScreen').style.display = 'none';
-  } else {
-    document.getElementById('loginMsg').textContent = 'Invalid username or password';
+  document.getElementById('loginBtn').addEventListener('click', () => {
+    const u = document.getElementById('username').value.trim();
+    const p = document.getElementById('password').value.trim();
+    if (validUsers[u] && validUsers[u] === p) {
+      currentUser = u;
+      document.getElementById('signinScreen').style.display = 'none';
+    } else {
+      document.getElementById('loginMsg').textContent = 'Invalid username or password';
+    }
+  });
+
+  document.getElementById('password').addEventListener('keypress', e => {
+    if (e.key === 'Enter') document.getElementById('loginBtn').click();
+  });
+
+  document.getElementById('chatInput').addEventListener('keypress', e => {
+    if (e.key === 'Enter') document.getElementById('sendChat').click();
+  });
+
+  const months = ["October 2025","November 2025","December 2025","January 2026","February 2026","March 2026"];
+  const subjects = ["Math","Science","English","History","Physics","Chemistry"];
+
+  function renderMonths() {
+    const container = document.getElementById('monthsContainer');
+    container.innerHTML = '';
+    months.forEach(month => {
+      const m = document.createElement('div');
+      m.className = 'month';
+      m.innerHTML = `<h3>${month}</h3><div class="days"></div>`;
+      const days = m.querySelector('.days');
+      days.innerHTML = ''; // ✅ Clear previous days
+      for (let d = 1; d <= 28; d++) {
+        const day = document.createElement('div');
+        day.className = 'day' + ((month === selectedMonth && d === selectedDay) ? ' selected' : '');
+        day.textContent = d;
+        day.addEventListener('click', () => {
+          selectedMonth = month;
+          selectedDay = d;
+          renderMonths();
+          renderSubjects();
+          document.getElementById('uploadArea').style.display = 'block';
+        });
+        days.appendChild(day);
+      }
+      container.appendChild(m);
+    });
   }
-});
 
-const months = ["October 2025","November 2025","December 2025","January 2026","February 2026","March 2026"];
-const subjects = ["Math","Science","English","History","Physics","Chemistry"];
-
-function renderMonths() {
-  const container = document.getElementById('monthsContainer');
-  container.innerHTML = '';
-  months.forEach(month => {
-    const m = document.createElement('div');
-    m.className = 'month';
-    m.innerHTML = `<h3>${month}</h3><div class="days"></div>`;
-    const days = m.querySelector('.days');
-    for (let d = 1; d <= 28; d++) {
-      const day = document.createElement('div');
-      day.className = 'day' + ((month === selectedMonth && d === selectedDay) ? ' selected' : '');
-      day.textContent = d;
-      day.addEventListener('click', () => {
-        selectedMonth = month;
-        selectedDay = d;
-        renderMonths();
+  function renderSubjects() {
+    const container = document.getElementById('subjectList');
+    container.innerHTML = '';
+    subjects.forEach(subject => {
+      const s = document.createElement('div');
+      s.className = 'subject' + (subject === selectedSubject ? ' selected' : '');
+      s.textContent = subject;
+      s.addEventListener('click', () => {
+        selectedSubject = subject;
         renderSubjects();
         document.getElementById('uploadArea').style.display = 'block';
       });
-      days.appendChild(day);
-    }
-    container.appendChild(m);
-  });
-}
-
-function renderSubjects() {
-  const container = document.getElementById('subjectList');
-  container.innerHTML = '';
-  subjects.forEach(subject => {
-    const s = document.createElement('div');
-    s.className = 'subject' + (subject === selectedSubject ? ' selected' : '');
-    s.textContent = subject;
-    s.addEventListener('click', () => {
-      selectedSubject = subject;
-      renderSubjects();
-      document.getElementById('uploadArea').style.display = 'block';
+      container.appendChild(s);
     });
-    container.appendChild(s);
-  });
-}
+  }
 
-renderMonths();
-renderSubjects();
+  renderMonths();
+  renderSubjects();
 
-document.getElementById('confirmUpload').addEventListener('click', async () => {
-  const file = document.getElementById('fileInput').files[0];
-  if (!file || !currentUser) return alert("Login and choose a file first");
+  document.getElementById('confirmUpload').addEventListener('click', async () => {
+    const file = document.getElementById('fileInput').files[0];
+    if (!file || !currentUser) return alert("Login and choose a file first");
 
-  const base64 = await new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = () => resolve(reader.result.split(',')[1]);
-    reader.onerror = reject;
-    reader.readAsDataURL(file);
-  });
+    const base64 = await new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result.split(',')[1]);
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
 
-  const payload = {
-    type: "upload",
-    filename: file.name,
-    mimeType: file.type || "application/octet-stream",
-    base64,
-    month: selectedMonth,
-    day: selectedDay,
-    subject: selectedSubject,
-    username: currentUser
-  };
+    const payload = {
+      type: "upload",
+      filename: file.name,
+      mimeType: file.type || "application/octet-stream",
+      base64,
+      month: selectedMonth,
+      day: selectedDay,
+      subject: selectedSubject,
+      username: currentUser
+    };
 
-  const res = await fetch(WEB_APP_URL, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload)
-  });
+    const res = await fetch(WEB_APP_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload)
+    });
 
-  const json = await res.json();
-  alert("Upload complete: " + JSON.stringify(json, null, 2));
-});
-
-document.getElementById('sendChat').addEventListener('click', async () => {
-  const message = document.getElementById('chatInput').value.trim();
-  if (!message || !currentUser) return alert("Login and type a message");
-
-  const res = await fetch(WEB_APP_URL, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ type: "chat", message })
+    const json = await res.json();
+    alert("Upload complete: " + JSON.stringify(json, null, 2));
   });
 
-  const json = await res.json();
-  const chatBox = document.getElementById('chatBox');
-  chatBox.innerHTML += `<div><strong>${currentUser}:</strong> ${message}</div>`;
-  chatBox.innerHTML += `<div><strong>AI:</strong> ${json.response}</div>`;
+  document.getElementById('sendChat').addEventListener('click', async () => {
+    const message = document.getElementById('chatInput').value.trim();
+    if (!message || !currentUser) return alert("Login and type a message");
+
+    const res = await fetch(WEB_APP_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ type: "chat", message })
+    });
+
+    const json = await res.json();
+    const chatBox = document.getElementById('chatBox');
+    chatBox.innerHTML += `<div><strong>${currentUser}:</strong> ${message}</div>`;
+    chatBox.innerHTML += `<div><strong>AI:</strong> ${json.response}</div>`;
+    chatBox.scrollTop = chatBox.scrollHeight;
+  });
 });
 </script>
 </body>
